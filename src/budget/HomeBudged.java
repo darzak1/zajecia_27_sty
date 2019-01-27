@@ -17,11 +17,21 @@ public class HomeBudged {
 
     private static final String INSERT_ENTRY_SQL = "insert into Budged.BudgedEntries (EntryName, Amount) values (?, ?)";
     private static final String GET_BALANCE_SQL = "select SUM(Amount) as Balance from Budged.BudgedEntries";
+    private static final String LAST_TEN_TRANSACTIONS = "select top 10 * from Budged.BudgedEntries order by EntryDate desc";
+
 
     public static void main(String[] args) {
 
 
         // do zrobiebnia walidacja wpisów od użytkownika
+        /*if (args[0] != null && args[1] != null){
+            Connection con = ;
+            try {
+                PreparedStatement ps1 = con.prepareStatement(LAST_TEN_TRANSACTIONS);
+            } catch (SQLException e) {
+                System.out.println();
+            }*/
+
         BudgedEntry be = new BudgedEntry();
         be.setEntryName(args[0]);
         be.setAmount(new BigDecimal(args[1]));
@@ -45,8 +55,8 @@ public class HomeBudged {
            }
 
             System.out.print("Zapisano! kwota: " + be.getEntryName());
-            System.out.print(", kwota" + hb.currencyFormat(be.getAmount()));
-            System.out.print(", saldo" + hb.currencyFormat(balance));
+            System.out.print(", kwota: " + hb.currencyFormat(be.getAmount()));
+            System.out.print(", saldo: " + hb.currencyFormat(balance));
 
 
         } catch (SQLException e) {
